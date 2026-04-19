@@ -1,6 +1,6 @@
 # Project Keyword Extractor
 A minimal FastAPI service that takes a free-text description of a project and
-returns a structured list of keywords (powered by Gemini 1.5 Flash).
+returns a structured list of keywords (powered by Gemini Flash).
 
 This project is part of a personal series on AI/ML Engineering, exploring how
 to build reliable, structured pipelines on top of LLMs. This is the very first
@@ -21,16 +21,19 @@ requests during the LLM call.
 * FastAPI - HTTP framework with automatic validation and `/docs` UI.
 * Uvicorn - ASGI server running the app.
 * Pydantic v2 - data validation and schema enforcement.
-* Google Generative AI SDK - Gemini 1.5 Flash client.
+* Google Generative AI SDK - Gemini Flash client.
 * uv - project and dependency management.
 
 ## Project structure:
+```
 01_keyword_extractor/
 ├── main.py           # All application code (single-file in this case)
 ├── pyproject.toml    # Project metadata and dependencies (managed by uv)
 ├── uv.lock           # Dependency versions
 ├── .env              # secrets
+├── .pythonversion
 └── .gitignore
+```
 
 ## Trying it out:
 
@@ -40,24 +43,29 @@ requests during the LLM call.
 * A Google AI Studio API key (free or paid)
 
 2. Clone and install:
+```
 git clone https://github.com/GRiosG/01_keyword_extractor.git
 cd keyword-extractor
 uv sync
+```
 
 3. Set your API Key (in .env)
 
 4. Run the server:
-uv run uvicorn main:app --reload
+`uv run uvicorn main:app --reload`
 
 5. Doc & request:
 Open http://localhost:8000/docs for the interactive Swagger UI.
 
 curl:
+```
 curl -X POST http://localhost:8000/extract_keywords \
   -H "Content-Type: application/json" \
   -d '{"project_description": "A real-time chat app with end-to-end encryption, build on WebSockets and deployed on AWS Lambda."}'
+```
 
 Expected response:
+```
 {
   "keywords": [
     "real-time chat",
@@ -67,6 +75,7 @@ Expected response:
     "serverless deployment"
   ]
 }
+```
 
 ## License:
 MIT

@@ -20,7 +20,7 @@ load_dotenv()
 # APP initialization ---------------------------------------------------------------------------------------------------
 app = FastAPI(
     title = 'Project Keyword Extractor',
-    description = 'Extract structured keywords from a project description using an LLM api call - Gemini 1.5 Flash.',
+    description = 'Extract structured keywords from a project description using an LLM api call - Gemini Flash.',
     version = '1.0',
 )
 
@@ -55,7 +55,7 @@ Example output:
 @app.post("/extract-keywords", response_model=ExtractedKeywords)
 async def extract_keywords(payload: ProjectInput) -> ExtractedKeywords:
     """
-    Extract keywords from a project description using Gemini 1.5 Flash.
+    Extract keywords from a project description using Gemini Flash.
     """
     response = await client.aio.models.generate_content(
         model = "gemini-flash-latest",
